@@ -14,10 +14,10 @@
       {
         "label": "main",
         "title": "Orbit Studio",
-        "width": 1100,
-        "height": 720,
-        "minWidth": 900,
-        "minHeight": 600,
+        "width": 1180,
+        "height": 760,
+        "minWidth": 960,
+        "minHeight": 640,
         "resizable": true
       },
       {
@@ -33,10 +33,28 @@
         "skipTaskbar": true,
         "shadow": false,
         "visible": false
+      },
+      {
+        "label": "ripple",
+        "title": "Ripple",
+        "url": "index.html?window=ripple",
+        "fullscreen": true,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "resizable": false,
+        "skipTaskbar": true,
+        "shadow": false,
+        "focus": false,
+        "visible": false
       }
     ],
     "security": {
-      "csp": null
+      "csp": null,
+      "assetProtocol": {
+        "enable": true,
+        "scope": ["$VIDEO/Orbit/**", "$HOME/Orbit/**"]
+      }
     }
   },
   "bundle": {
@@ -48,9 +66,6 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
-    ],
-    "macOS": {
-      "entitlements": null
-    }
+    ]
   }
 }
