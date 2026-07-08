@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+/* Transparent background for the borderless webcam bubble window. */
+body.webcam-bubble {
+  background: transparent;
+}
