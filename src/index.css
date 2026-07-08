@@ -9,7 +9,20 @@ body,
   margin: 0;
 }
 
-/* Transparent background for the borderless webcam bubble window. */
-body.webcam-bubble {
+/* Transparent background for the borderless overlay windows (webcam, ripple). */
+body.transparent-window {
   background: transparent;
+  overflow: hidden;
+}
+
+/* Click-ripple overlay animation. */
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.6);
+    opacity: 0;
+  }
 }
