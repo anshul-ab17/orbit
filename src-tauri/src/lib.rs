@@ -699,8 +699,7 @@ fn setup_tray(app: &tauri::App) -> tauri::Result<()> {
     let quit = MenuItem::with_id(app, "quit", "Quit", true, None::<&str>)?;
     let menu = Menu::with_items(app, &[&show, &quit])?;
 
-    TrayIconBuilder::new()
-        .icon(app.default_window_icon().unwrap().clone())
+    let mut builder = TrayIconBuilder::new()
         .tooltip("Orbit")
         .menu(&menu)
         .on_menu_event(|app, event| match event.id.as_ref() {
@@ -712,8 +711,13 @@ fn setup_tray(app: &tauri::App) -> tauri::Result<()> {
             }
             "quit" => app.exit(0),
             _ => {}
-        })
-        .build(app)?;
+        });
+
+    if let Some(icon) = app.default_window_icon() {
+        builder = builder.icon(icon.clone());
+    }
+
+    builder.build(app)?;
     Ok(())
 }
 
@@ -732,7 +736,9 @@ fn setup_hotkey(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
             })
             .build(),
     )?;
-    app.global_shortcut().register(toggle)?;
+    if let Err(e) = app.global_shortcut().register(toggle) {
+        eprintln!("Warning: Failed to register global hotkey (Ctrl+Shift+R): {:?}", e);
+    }
     Ok(())
 }
 
